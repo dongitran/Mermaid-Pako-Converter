@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mermaid-pako-converter
+  namespace: mermaid-pako-converter
+  labels:
+    app: mermaid-pako-converter
+spec:
+  serviceName: mermaid-pako-converter
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mermaid-pako-converter
+  template:
+    metadata:
+      labels:
+        app: mermaid-pako-converter
+    spec:
+      containers:
+        - name: mermaid-pako-converter
+          image: ideavn/mermaid-pako-converter:{latest}
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 20m
+              memory: 28Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mermaid-pako-converter-service
+  namespace: mermaid-pako-converter
+spec:
+  selector:
+    app: mermaid-pako-converter
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mermaid-pako-converter-ingress
+  namespace: mermaid-pako-converter
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: demo.mermaid-pako-converter.click
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: mermaid-pako-converter-service
+            port:
+              number: 3000

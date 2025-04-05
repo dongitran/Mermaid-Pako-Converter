@@ -1,0 +1,3 @@
+docker build -t mermaid-pako-converter .
+
+docker run -d -p 3000:3000 --name mermaid-pako-converter mermaid-pako-converter

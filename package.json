@@ -1,0 +1,26 @@
+{
+  "name": "mermaid-pako-converter",
+  "version": "1.0.0",
+  "description": "API to convert Mermaid code to Pako compressed strings",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "mermaid",
+    "pako",
+    "compression",
+    "api"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "5.1.0",
+    "pako": "^2.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
