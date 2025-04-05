@@ -52,7 +52,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host: demo.mermaid-pako-converter.click
+  - host: mermaid-pako-converter.urdraw.click
     http:
       paths:
       - pathType: Prefix
